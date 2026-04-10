@@ -1438,12 +1438,12 @@ with st.spinner("Pulling prices, holidays, breadth, global cues, and news intell
 # HERO
 # =========================================================
 st.markdown(f"""
-<div class="hero">
-    <div class="main-title">Indian Market Intelligence Pro</div>
-    <div class="subtitle">Stronger scoring • better short-term ideas • derivatives view</div>
-    <span class="{bias_badge(regime['label'])}">{regime['label']}</span>
-    <span class="{bias_badge(day_view['verdict'])}">{day_view['verdict']}</span>
-    <span class="{bias_badge(overnight['label'])}">{overnight['label']}</span>
+<div class="note-box">
+    <b>Position sizing example for top idea ({best['name']}):</b><br>
+    Capital: ₹{capital:,.0f}<br>
+    Max risk: ₹{risk_amount:,.0f}<br>
+    Risk per share: ₹{per_share_risk:,.2f}<br>
+    Approx quantity: <b>{qty}</b>
 </div>
 """, unsafe_allow_html=True)
 
