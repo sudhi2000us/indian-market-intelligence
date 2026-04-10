@@ -859,8 +859,8 @@ with st.spinner("Pulling prices, holidays, breadth, global cues, and news intell
 
 st.markdown(f"""
 <div class="hero">
-    <div class="main-title">Indian Market Intelligence Pro v2</div>
-    <div class="subtitle">Relaxed swing scanner • stronger short-term idea discovery • sector-aware scoring • derivatives view</div>
+    <div class="main-title">Indian Market Intelligence</div>
+    <div class="subtitle">Stronger • short-term idea discovery • sector-aware scoring • derivatives view</div>
     <span class="{bias_badge(regime['label'])}">{regime['label']}</span>
     <span class="{bias_badge(day_view['verdict'])}">{day_view['verdict']}</span>
     <span class="{bias_badge(overnight['label'])}">{overnight['label']}</span>
