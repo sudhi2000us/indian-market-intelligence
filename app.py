@@ -1578,28 +1578,23 @@ if regime["label"] == "BEARISH":
 
 with tabs[2]:
     st.markdown('<div class="section-title">Short-Term Swing Candidates</div>', unsafe_allow_html=True)
-    if ideas.empty:
-        st.info("No high-conviction BUY ideas right now. Best action may be to wait or track watchlist names.")
-    else:
-        top_cards = st.columns(min(4, len(ideas)))
-        for col, (_, row) in zip(top_cards, ideas.head(4).iterrows()):
-            with col:
-                st.markdown(f"""
-                <div class="idea-card">
-                    <div class="metric-label">{row['name']}</div>
-                    <div class="metric-value" style="font-size:1.4rem;">{row['signal']}</div>
-                    <div class="small-muted">Sector: {row['sector']}</div>
-                    <div class="small-muted">Score: <b>{row['score']}</b></div>
-                    <div class="small-muted">LTP: ₹{row['ltp']}</div>
-                    <div class="small-muted">Target 1: ₹{row['target1']} ({row['profit_pct_1']}%)</div>
-                    <div class="small-muted">Target 2: ₹{row['target2']} ({row['profit_pct_2']}%)</div>
-                    <div class="small-muted">Stoploss: ₹{row['sl']} ({row['stoploss_pct']}%)</div>
-                    <div class="small-muted">R:R: {row['rr']}</div>
-                    <div class="small-muted">Horizon: {row['horizon']}</div>
-                    <hr class="soft">
-                    <div class="small-muted">{row['notes']}</div>
-                </div>
-                """, unsafe_allow_html=True)
+if ideas.empty:
+    st.info("No eligible short-term idea found right now.")
+else:
+    best = ideas.iloc[0]
+    risk_amount = capital * (risk_pct / 100)
+    per_share_risk = max(best["ltp"] - best["sl"], 0.01)
+    qty = int(risk_amount // per_share_risk)
+
+    st.markdown(f"""
+    <div class="note-box">
+        <b>Position sizing example for top idea ({best['name']}):</b><br>
+        Capital: ₹{capital:,.0f}<br>
+        Max risk: ₹{risk_amount:,.0f}<br>
+        Risk per share: ₹{per_share_risk:,.2f}<br>
+        Approx quantity: <b>{qty}</b>
+    </div>
+    """, unsafe_allow_html=True)
 
         st.dataframe(
             ideas[[
