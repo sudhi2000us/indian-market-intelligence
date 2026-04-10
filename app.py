@@ -1607,21 +1607,23 @@ else:
             use_container_width=True,
             hide_index=True,
         )
+    if not ideas.empty:
+    best = ideas.iloc[0]
+    risk_amount = capital * (risk_pct / 100)
+    per_share_risk = max(best["ltp"] - best["sl"], 0.01)
+    qty = int(risk_amount // per_share_risk)
 
-        best = ideas.iloc[0]
-        risk_amount = capital * (risk_pct / 100)
-        per_share_risk = max(best["ltp"] - best["sl"], 0.01)
-        qty = int(risk_amount // per_share_risk)
-
-        st.markdown(f"""
-        <div class="note-box">
-            <b>Position sizing example for top idea ({best['name']}):</b><br>
-            Capital: ₹{capital:,.0f}<br>
-            Max risk: ₹{risk_amount:,.0f}<br>
-            Risk per share: ₹{per_share_risk:,.2f}<br>
-            Approx quantity: <b>{qty}</b>
-        </div>
-        """, unsafe_allow_html=True)
+    st.markdown(f"""
+    <div class="note-box">
+        <b>Position sizing example for top idea ({best['name']}):</b><br>
+        Capital: ₹{capital:,.0f}<br>
+        Max risk: ₹{risk_amount:,.0f}<br>
+        Risk per share: ₹{per_share_risk:,.2f}<br>
+        Approx quantity: <b>{qty}</b>
+    </div>
+    """, unsafe_allow_html=True)
+else:
+    st.info("No eligible idea available right now for position sizing.")
 high_conviction = rank_df[
     (rank_df["signal"] == "BUY") &
     (rank_df["fund_score"] >= 35) &
