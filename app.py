@@ -1606,8 +1606,7 @@ st.dataframe(
             use_container_width=True,
             hide_index=True,
         )
-
-    if not ideas.empty:
+if not ideas.empty:
     best = ideas.iloc[0]
     risk_amount = capital * (risk_pct / 100)
     per_share_risk = max(best["ltp"] - best["sl"], 0.01)
