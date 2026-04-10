@@ -1595,8 +1595,7 @@ else:
         Approx quantity: <b>{qty}</b>
     </div>
     """, unsafe_allow_html=True)
-
-        st.dataframe(
+st.dataframe(
             ideas[[
                 "symbol", "name", "sector", "signal", "score",
                 "tech_score", "news_score", "fund_score",
